@@ -6,12 +6,7 @@ use DomainException;
 use Illuminate\Container\Container;
 use Valet\Contracts\PackageManager;
 use Valet\Contracts\ServiceManager;
-use Valet\PackageManagers\Apt;
-use Valet\PackageManagers\Dnf;
-use Valet\PackageManagers\Eopkg;
-use Valet\PackageManagers\PackageKit;
-use Valet\PackageManagers\Pacman;
-use Valet\PackageManagers\Yum;
+use Valet\PackageManagers\Portage;
 use Valet\ServiceManagers\LinuxService;
 use Valet\ServiceManagers\Systemd;
 
@@ -22,7 +17,7 @@ class Valet
 
     public $valetBin = '/usr/local/bin/valet';
     public $sudoers  = '/etc/sudoers.d/valet';
-    public $github   = 'https://api.github.com/repos/cpriego/valet-linux/releases/latest';
+    public $github   = 'https://api.github.com/repos/DrewWaltonsTech/valet-gentoo/releases/latest';
 
     /**
      * Create a new Valet instance.
@@ -122,12 +117,7 @@ class Valet
     public function getAvailablePackageManager(): string
     {
         return collect([
-            Apt::class,
-            Dnf::class,
-            Pacman::class,
-            Yum::class,
-            PackageKit::class,
-            Eopkg::class,
+            Portage::class,
         ])->first(static function ($pm) {
             return resolve($pm)->isAvailable();
         }, static function () {

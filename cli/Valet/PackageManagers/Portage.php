@@ -6,12 +6,12 @@ use DomainException;
 use Valet\CommandLine;
 use Valet\Contracts\PackageManager;
 
-class Apt implements PackageManager
+class Portage implements PackageManager
 {
     public $cli;
 
     /**
-     * Create a new Apt instance.
+     * Create a new Pacman instance.
      *
      * @param CommandLine $cli
      * @return void
@@ -29,7 +29,7 @@ class Apt implements PackageManager
      */
     public function packages($package)
     {
-        $query = "dpkg -l {$package} | grep '^ii' | sed 's/\s\+/ /g' | cut -d' ' -f2";
+        $query = "qlist -I {$package}";
 
         return explode(PHP_EOL, $this->cli->run($query));
     }
@@ -66,12 +66,12 @@ class Apt implements PackageManager
      */
     public function installOrFail($package)
     {
-        output('<info>[' . $package . '] is not installed, installing it now via Apt...</info> 🍻');
+        output('<info>[' . $package . '] is not installed, installing it now via Portage...</info> 🍻');
 
-        $this->cli->run(trim('apt-get install -y ' . $package), function ($exitCode, $errorOutput) use ($package) {
+        $this->cli->run(trim('emerge '.$package), function ($exitCode, $errorOutput) use ($package) {
             output($errorOutput);
 
-            throw new DomainException('Apt was unable to install [' . $package . '].');
+            throw new DomainException('Portage was unable to install [' . $package . '].');
         });
     }
 
@@ -90,7 +90,7 @@ class Apt implements PackageManager
      */
     public function nmRestart($sm)
     {
-        $sm->restart(['network-manager']);
+        $sm->restart('NetworkManager');
     }
 
     /**
@@ -101,8 +101,8 @@ class Apt implements PackageManager
     public function isAvailable()
     {
         try {
-            $output = $this->cli->run('which apt-get', function ($exitCode, $output) {
-                throw new DomainException('Apt not available');
+            $output = $this->cli->run('which emerge', function ($exitCode, $output) {
+                throw new DomainException('Portage not available');
             });
 
             return $output != '';

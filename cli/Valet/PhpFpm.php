@@ -39,8 +39,8 @@ class PhpFpm
      */
     public function install()
     {
-        if (!$this->pm->installed("php{$this->version}-fpm")) {
-            $this->pm->ensureInstalled("php{$this->version}-fpm");
+        if (! $this->pm->installed("dev-lang/php")) {
+            $this->pm->ensureInstalled("dev-lang/php");
             $this->sm->enable($this->fpmServiceName());
         }
 
@@ -193,7 +193,7 @@ class PhpFpm
         if (!$real && $this->files->exists(VALET_HOME_PATH . '/use_php_version')) {
             $version = $this->files->get(VALET_HOME_PATH . '/use_php_version');
         } else {
-            $version = explode('php', basename($this->files->readLink('/usr/bin/php')))[1];
+            $version = (float)phpversion();
         }
 
         return $version;
@@ -206,11 +206,7 @@ class PhpFpm
      */
     public function fpmServiceName($serviceName = null)
     {
-        if($serviceName === null){
-            $service = "php{$this->version}-fpm";
-        }else{
-            $service = $serviceName;
-        }
+        $service = 'php-fpm@'.$this->version;
         $status = $this->sm->status($service);
         if (strpos($status, 'not-found') || strpos($status, 'not be found')) {
                 $secondTry = $this->fpmServiceName("php-fpm{$this->version}");
@@ -232,12 +228,7 @@ class PhpFpm
     public function fpmConfigPath()
     {
         return collect([
-            '/etc/php/' . $this->version . '/fpm/pool.d', // Ubuntu
-            '/etc/php' . $this->version . '/fpm/pool.d', // Ubuntu
-            '/etc/php' . $this->version . '/php-fpm.d', // Manjaro
-            '/etc/php-fpm.d', // Fedora
-            '/etc/php/php-fpm.d', // Arch
-            '/etc/php7/fpm/php-fpm.d', // openSUSE
+            '/etc/php/fpm-php'.$this->version.'/fpm.d', // Gentoo
         ])->first(function ($path) {
             return is_dir($path);
         }, function () {
