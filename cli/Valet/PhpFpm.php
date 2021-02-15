@@ -190,11 +190,7 @@ class PhpFpm
      */
     public function getVersion($real = false)
     {
-        if (!$real && $this->files->exists(VALET_HOME_PATH . '/use_php_version')) {
-            $version = $this->files->get(VALET_HOME_PATH . '/use_php_version');
-        } else {
-            $version = (float)phpversion();
-        }
+        $version = PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;
 
         return $version;
     }
