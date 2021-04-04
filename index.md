@@ -1,4 +1,5 @@
-<h1>Valet Gentoo</h1>
+<h1><img src="https://www.gentoo.org/assets/img/logo/gentoo-signet.svg" height="40">
+Valet Gentoo</h1>
 - [Introduction](#introduction)
     - [Valet Or Homestead](#valet-or-homestead)
 - [Installation](#installation)

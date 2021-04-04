@@ -1,5 +1,8 @@
 [Main page](index)
 
+<h1><img src="https://www.gentoo.org/assets/img/logo/gentoo-signet.svg" height="40">
+Valet Gentoo</h1>
+
 # Requirements
 - [Gentoo Linux](#gentoo)
 - [Regarding sudo and root user](#sudo)
