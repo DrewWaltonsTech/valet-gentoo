@@ -1,9 +1,8 @@
-<h1><img src="https://cdn.rawgit.com/wiki/cpriego/valet-linux/images/valet.svg"></h1>
+<h1>Valet Gentoo</h1>
 - [Introduction](#introduction)
     - [Valet Or Homestead](#valet-or-homestead)
 - [Installation](#installation)
     - [Upgrading](#upgrading)
-    - [Uninstalling](#uninstalling)
 - [Serving Sites](#serving-sites)
     - [The "Park" Command](#the-park-command)
     - [The "Link" Command](#the-link-command)
@@ -20,13 +19,13 @@ Please **do not, under any circumstance, install valet with** root **or the** `s
 
 ## <a name="introduction">Introduction</a>
 
-Valet *Linux* is a Laravel development environment for Linux minimalists. No Vagrant, no `/etc/hosts` file. You can even share your sites publicly using local tunnels. _Yeah, we like it too._
+Valet *Gentoo* is a Laravel development environment for Gentoo Linux minimalists. No Vagrant, no `/etc/hosts` file. You can even share your sites publicly using local tunnels. _Yeah, we like it too._
 
-Valet *Linux* configures your system to always run Nginx in the background when your machine starts. Then, using [DnsMasq](https://en.wikipedia.org/wiki/Dnsmasq), Valet proxies all requests on the `*.test` domain to point to sites installed on your local machine.
+Valet *Gentoo* configures your system to always run Nginx in the background when your machine starts. Then, using [DnsMasq](https://en.wikipedia.org/wiki/Dnsmasq), Valet proxies all requests on the `*.test` domain to point to sites installed on your local machine.
 
 In other words, a blazing fast Laravel development environment that uses roughly 7mb of RAM. Valet *Linux* isn't a complete replacement for Vagrant or Homestead, but provides a great alternative if you want flexible basics, prefer extreme speed, or are working on a machine with a limited amount of RAM.
 
-Out of the box, Valet support includes, but is not limited to:
+Out of the box, Valet Gentoo support includes, but is not limited to:
 
 - [Laravel](https://laravel.com)
 - [Lumen](https://lumen.laravel.com)
@@ -47,20 +46,21 @@ However, you may extend Valet with your own [custom drivers](#custom-valet-drive
 
 As you may know, Laravel offers [Homestead](https://laravel.com/docs/5.4/homestead), another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows.
 
-Valet _Linux_ requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using your package manager. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.
+Valet _Gentoo_ requires you to install PHP and a database server directly onto your local machine. This is easily achieved by using your package manager. Valet provides a blazing fast local development environment with minimal resource consumption, so it's great for developers who only require PHP / MySQL and do not need a fully virtualized development environment.
 
 Both Valet and Homestead are great choices for configuring your Laravel development environment. Which one you choose will depend on your personal taste and your team's needs.
 
 ## <a name="installation">Installation</a>
 
- - Install Valet with [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) via `composer global require cpriego/valet-linux`.
- - Run the `valet install` command. This will configure and install Valet and DnsMasq, and register Valet's daemon to launch when your system starts.
+- Review Gentoo-specific [requirements](requirements) before installing Valet Gentoo.
+- Install Valet with [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) via `composer global require drewwalton19216801/valet-gentoo`.
+- Run the `valet install` command. This will configure and install Valet and DnsMasq, and register Valet's daemon to launch when your system starts.
 
 Once Valet is installed, try pinging any `*.test` domain on your terminal using a command such as `ping foobar.test`. If Valet is installed correctly you should see this domain responding on `127.0.0.1`.
 
 Valet will automatically start its daemon each time your machine boots. There is no need to run `valet start` or `valet install` ever again once the initial Valet installation is complete.
 
-> Valet *Linux* is installed as a `composer` global package. You need to have composer installed in your system and ideally have the composer global tools added to your `PATH`.
+> Valet *Gentoo* is installed as a `composer` global package. You need to have composer installed in your system and ideally have the composer global tools added to your `PATH`.
 
 > Before installation, you should review your system specific [requirements](requirements) and make sure that no other programs such as Apache or Nginx are binding to your local machine's port 80.
 
@@ -77,23 +77,10 @@ For example, if you'd like to use `.app` instead of `.test`, run `valet domain a
 
 You may update your Valet installation using the `composer global update` command in your terminal. After upgrading, it is good practice to run the `valet install` command so Valet can make additional upgrades to your configuration files if necessary.
 
-<a name="uninstalling"></a>
-### Uninstalling
-After uninstalling valet some people are experiencing some problems.
-Here is a series of commands that you could use to fix your problem (For Ubuntu users) Thanks to @dakira for this guide.
-- `rm /opt/valet`
-- check the folders /etc/NetworkManager/{conf.d,dnsmasq.d} for valet-specific settings and remove them
-- remove the files /etc/dnsmasq.d/{valet,options}
-- Make sure systemd-resolved is running (`systemctl status systemd-resolved`), if not, enable (`systemctl enable systemd-resolved`) and start it (`systemctl start systemd-resolved`).
-- remove the dnsmasq package (leaving dnsmasq-base!)
-- make sure /etc/resolv.conf is a symlink to /run/systemd/resolve/resolv.conf
-- restart NetworkManager `systemctl restart NetworkManager`
-
 
 ## <a name="serving-sites">Serving Sites</a>
 
 Once Valet is installed, you're ready to start serving sites. Valet provides two commands to help you serve your Laravel sites: `park` and `link`.
-
 
 <a name="the-park-command"></a>
 **The `park` Command**
@@ -155,7 +142,7 @@ valet port
 <a name="securing-sites"></a>
 **Securing Sites With TLS**
 
-By default, Valet serves sites over plain HTTP. However, if you would like to serve a site over encrypted TLS using HTTP/2, use the `secure` command. For example, if your site is being served by Valet on the `laravel.test` domain, you should run the following command to secure it:
+By default, Valet serves sites over plain HTTP. However, if you would like to serve a site over encrypted TLS using HTTP/2, use the `secure` command. For example, if your site is being served by Valet on the `laravel.dev` domain, you should run the following command to secure it:
 
     valet secure laravel
 
