@@ -17,7 +17,7 @@ In other words, a blazing fast Laravel development environment that uses roughly
 
 ## Official Documentation
 
-Documentation for Valet can be found on the [Valet Gentoo website](https://drewwalton19216801.github.io/valet-gentoo-docs/).
+Documentation for Valet can be found on the [Valet Gentoo website](https://drewwaltonstech.github.io/valet-gentoo/).
 
 ## License
 
