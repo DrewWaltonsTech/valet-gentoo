@@ -22,7 +22,7 @@ AppArmor | In order to use Valet Gentoo when [AppArmor is enabled](https://wiki.
 Composer | Install [composer](https://wiki.archlinux.org/index.php/PHP#Composer), php package manager. You may also install composer with `emerge -av dev-php/composer
 
 -----
-##<a name="apparmor">Regarding AppArmor</a>
+## <a name="apparmor">Regarding AppArmor</a>
 
 If you wish to use Valet Gentoo with AppArmor, you will need to add the following to `/etc/apparmor.d/local/usr.sbin.dnsmasq`:
 ```
