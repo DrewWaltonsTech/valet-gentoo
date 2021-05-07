@@ -19,7 +19,7 @@ Nginx USE flags | The default nginx USE flags should be fine.
 PHP version | PHP ***must*** be installed prior to installing Valet Gentoo. Install with `emerge -av dev-lang/php` ( need **>= 7.3** ; specify version with `emerge -av php:8.0`)
 PHP extensions | In Gentoo, USE flags can be set to configure PHP modules. Recommended USE flags are: `acl bcmath berkdb bzip2 cli ctype curl fileinfo filter fpm gd gdbm hash iconv inifile intl ipv6 json ldap mysql mysqli nls opcache pcntl pdo phar posix readline session simplexml spell ssl systemd tokenizer unicode xml xmlreader xmlrpc xmlwriter xslt zip zlib`
 AppArmor | In order to use Valet Gentoo when [AppArmor is enabled](https://wiki.gentoo.org/wiki/AppArmor), you will need to modify your system as [mentioned below](#apparmor).
-Composer | Install [composer](https://wiki.archlinux.org/index.php/PHP#Composer), php package manager. You may also install composer with `emerge -av dev-php/composer
+Composer | Install [composer](https://wiki.archlinux.org/index.php/PHP#Composer), php package manager. You may also install composer with `emerge -av dev-php/composer`
 
 -----
 ## <a name="apparmor">Regarding AppArmor</a>
