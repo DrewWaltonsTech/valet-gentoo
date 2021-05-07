@@ -54,7 +54,7 @@ Both Valet and Homestead are great choices for configuring your Laravel developm
 ## <a name="installation">Installation</a>
 
 - Review Gentoo-specific [requirements](requirements) before installing Valet Gentoo.
-- Install Valet with [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) via `composer global require drewwalton19216801/valet-gentoo`.
+- Install Valet with [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) via `composer global require drewwaltonstech/valet-gentoo`.
 - Run the `valet install` command. This will configure and install Valet and DnsMasq, and register Valet's daemon to launch when your system starts.
 
 Once Valet is installed, try pinging any `*.test` domain on your terminal using a command such as `ping foobar.test`. If Valet is installed correctly you should see this domain responding on `127.0.0.1`.
